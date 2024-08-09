@@ -1,0 +1,191 @@
+---
+title: "Matlib"
+output: html_document
+date: "2024-08-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(matlib)
+```
+
+# Matlib
+
+```{r}
+A = rbind(c(2,2),c(-1,1))
+b = c(1,2)
+AB = cbind(A,b)
+```
+
+Mostrar la ecuacion
+```{r}
+showEqn(A,b)
+```
+
+## Mostrar el rango
+```{r}
+R(A)
+```
+```{r}
+R(AB)
+```
+como ambos rangos son iguales son compatibles determinados
+
+## Teorema de Rouche-Frobenius
+```{r}
+all.equal(R(A),R(AB))
+```
+Ademas como el rango de la matriz de coeficientes y el de la ampoliada coinciden entre si y con el numero de incofnitar por el teorema de Rouche-Grobenius, podemos concluir que se trata de un sistema compatible y determinado
+
+# Resolver 
+la matriz ya que se cumple lo anterior
+
+```{r}
+Solve(A,b, fractions = TRUE)
+```
+
+# Representacion de sistemas
+
+```{r}
+plotEqn(A,b)
+points(-3/4,5/4, col="turquoise1", pch = 19)
+```
+## Ejemplo 2
+
+```{r}
+A = rbind(c(4,2),
+          c(1,-2),
+          c(3,4))
+b = rbind(c(3,2,1))
+```
+
+
+```{r}
+showEqn(A,b)
+```
+```{r}
+plotEqn(A,b)
+```
+## Sistema de 3 ecuaciones con 3 incognitas
+
+```{r}
+A = rbind(c(1,1,2),
+          c(2,4,-3),
+          c(3,6,-5))
+
+b= c(9,1,0)
+showEqn(A,b)
+```
+```{r}
+plotEqn3d(A,b, xlim = c(-3,3), ylim = c(0,6))
+```
+
+## Sistema de ecuaciones indeterminado
+
+```{r}
+A=matrix(c(1,1,-1,1,-1,1,3,1,-1), byrow = TRUE, nrow = 3, ncol = 3)
+b=c(2,1,5)
+AB = cbind(A,b)
+```
+
+Son 3 ecuaciones con 3 incognitas
+
+```{r}
+c(R(A),R(AB))
+```
+
+```{r}
+all.equal(R(A),R(AB))
+```
+
+## Con echelon tambien se puede ver que es un sistema compatible indeterminado
+```{r}
+echelon(AB)
+```
+
+```{r}
+Solve(A,b,fractions=TRUE)
+```
+
+```{r}
+plotEqn3d(A,b,xlim = c(-10,10), ylim = c(-10,10), zlim = c(10,10))
+```
+
+## Sistemas incompatibles con R
+
+```{r}
+A=cbind(c(1,1,2),c(1,-1,1))
+b=cbind(c(2,1,3))
+AB=cbind(A,b)
+showEqn(A, b)
+```
+
+3 Ecuaciones con 2 incognitas
+
+```{r}
+c(R(A),R(AB))
+```
+
+```{r}
+all.equal(R(A),R(AB))
+```
+
+Como los rangos son diferentes entonces por el teorema de Rouche-Frobenius concluimos que se trata de un sistema INCOMPATIBLE
+NO TIENE SOLUCION
+
+```{r}
+echelon(AB)
+```
+
+```{r}
+Solve(A,b, fractions = TRUE)
+```
+
+```{r}
+plotEqn(A,b,xlim = c(0,2), ylim = c(0,1.5))
+```
+
+## Ecuaciones matriciales 
+
+```{r}
+A = rbind(c(0,4),
+          c(2,1))
+
+B = rbind(c(1,-1),
+          c(2,3))
+
+C = rbind(c(1,2),
+          c(3,-2))
+
+D = rbind(c(-2,1),
+          c(-1,1))
+
+I = diag(1,nrow = 2, ncol = 2)
+```
+
+Resolver
+AX - (C + D)X=3D-3B+10I2
+
+Despejando X y 3
+(A-(C+D))X = 3(D-B)+10I2
+
+```{r}
+M = A-(C+D)
+M
+```
+
+```{r}
+N = 3 * (D-B) + 10 * I
+N
+```
+
+```{r}
+X =solve(M,N)
+X
+```
+
+Comprobacion
+```{r}
+A%*%X + 3*B == (C+D)%*%X+3*D+10*I
+```
+
