@@ -37,10 +37,7 @@ rsconnect/
 .Rproj.user
 .DS_Store
 
-<<<<<<< HEAD
 env/
-=======
-env
 
 .idea/workspace.xml
->>>>>>> temp
+
