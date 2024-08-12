@@ -1,8 +1,10 @@
 ---
 title: "Ejercicios"
-subtitle: "Números Complejos"
 author: "Curso Álgebra Lineal"
-output: pdf_document
+subtitle: Números Complejos
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}

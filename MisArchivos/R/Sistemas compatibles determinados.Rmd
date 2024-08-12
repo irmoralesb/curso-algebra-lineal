@@ -1,0 +1,61 @@
+---
+title: "Sistemas Compatibles Determinados"
+author: "Raul Morales"
+date: "2024-08-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Sistemas compatibles determinados con R
+
+Matriz
+```{r}
+A = rbind(c(1,1,2),
+          c(2,4,-3),
+          c(3,6,-5))
+
+B = cbind(c(9,1,0))
+
+AB <- cbind(A,B)
+```
+
+Verificar si el rango de A y A|B es igual
+
+```{r}
+qr(A)$rank == qr(AB)$rank
+```
+Checar si es compatible prederterminado, rank (rango) == numero de incognitas (3) ?
+```{r}
+qr(A)$rank==3
+```
+
+Sacar la ____
+
+```{r}
+solve(A,B)
+```
+
+Otra forma de comprobar que la solucion nos da B:
+```{r}
+solution = c(1,2,3)
+A%*%solution
+```
+
+```{r}
+A%*%solution == B
+```
+
+## Segunda forma usando matlib
+```{r}
+library("matlib")
+```
+```{r}
+A = rbind(c(2,2),
+          c(-1,1))
+B = cbind(c(1,2))
+AB = cbind(A,B)
+```
+

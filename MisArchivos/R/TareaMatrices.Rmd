@@ -1,0 +1,96 @@
+---
+title: "TareaMatrices"
+author: "Raul Morales"
+date: "2024-08-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("Biodem")
+```
+
+# Tarea Matrices
+
+## Pregunta 1
+Dadas las matrices
+```{r}
+A = rbind(c(0,1,-2),c(2,3,-1),c(1,-1,5))
+B = rbind(c(1,-1,2,1),c(2,-2,2,-2),c(-1,2,1,2))
+C = cbind(c(2,0,1,-4))
+```
+
+a) A * B
+```{r}
+A%*%B
+```
+b) B * C
+```{r}
+B%*%C
+```
+c) B'
+```{r}
+t(B)
+```
+
+d) A` * B
+```{r}
+t(A)%*%B
+```
+
+e) C' * B'
+```{r}
+t(C)%*%t(B)
+```
+## Pregunta 2
+
+Considerar las matrices
+```{r}
+A= matrix(c(0,1,0,1), nrow = 2,byrow = TRUE)
+B= matrix(c(-1,-1,0,0), nrow = 2, byrow = TRUE)
+```
+
+Demostrar
+```{r}
+X = mtx.exp(A+B,2) 
+Y = mtx.exp(A,2) + (2 * (A%*%B)) + mtx.exp(B,2)
+X != Y
+```
+
+```{r}
+X = mtx.exp(A+B,3)
+Y = mtx.exp(A,3) + (3 * (mtx.exp(A,2)%*%B)) + (3 * (A%*%mtx.exp(B,2))) + mtx.exp(B,3)
+X == Y
+```
+
+## Rango
+```{r}
+A = rbind(c(-1,1,-2), 
+          c(1,1,1),
+          c(2,1,1))
+
+qr(A)$rank
+```
+```{r}
+B = rbind(c(-1,2,3,4,5),
+          c(1,2,1,3,2),
+          c(0,4,4,7,7))
+qr(B)$rank
+
+```
+## Inversa de:
+```{r}
+A = rbind(c(1,2,0),
+         c(0,1,-1),
+         c(0,0,2))
+
+solve(A)
+```
+
+```{r}
+B = rbind(c(1i,0,0),
+          c(0,0,1),
+          c(1,1i,0))
+solve(B)
+```
+

@@ -1,0 +1,205 @@
+---
+title: "Matrix"
+author: "Raul Morales"
+date: "2024-08-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Matrices
+
+### Crear matriz 1x4
+
+```{r}
+row = matrix(c(1,2,3,4), nrow=1)
+row
+```
+
+### Crear matrix 4x1
+
+```{r}
+column = matrix(c(1,2,3,4), ncol = 1)
+column
+```
+
+### Matriz 3x4
+```{r}
+A = matrix(c(1,1,3,5,2,4,3,-2,-2,2,-1,3), nrow = 3, ncol = 4, byrow = TRUE)
+A
+```
+
+### Matriz especificando solo numero de lineas
+```{r}
+B = matrix(c(1,0,2,3,3,2,1,-2,3), nrow = 3, byrow = FALSE)
+B
+```
+
+### Usando RBind
+```{r}
+C = rbind(c(1,2,3),c(4,5,6),c(7,8,9))
+C
+```
+
+### Usando CBind
+```{r}
+D = cbind(c(1,2,3),c(4,5,6),c(7,8,9))
+D
+```
+
+### Accediendo elementos
+#### Elemento especifico
+```{r}
+A[3,3]
+```
+#### Toda la linea 1
+```{r}
+A[1,]
+```
+#### Toda la columna 2
+```{r}
+A[,2]
+```
+### Matrix en ceros
+```{r}
+O = matrix(0,nrow = 3, ncol = 3)
+O
+```
+### Matrix de 1s
+```{r}
+ones = matrix(1, nrow = 3, ncol = 3)
+ones
+```
+#### Matriz diagonal
+```{r}
+E = diag(c(1,2,3,4,5,6))
+E
+```
+### Obtener la diagonal de una matriz
+```{r}
+M = rbind(c(1,0,1), c(2,-1,5), c(3,3,2))
+diag(M)
+```
+### Obteber numero de filas
+```{r}
+nrow(M)
+```
+### Obtener numero de columnas
+```{r}
+ncol(M)
+```
+### Dimension de la matiz
+```{r}
+dim(M)
+```
+
+### Suma de matrices
+Suma todos los elementos de la matriz
+```{r}
+sum(M)
+```
+### Suma por filas
+```{r}
+rowSums(M)
+```
+### Suma por columnas
+```{r}
+colSums(M)
+```
+### Producto de cada elemento de la matriz
+```{r}
+prod(M)
+```
+### Media de todos los elementos de la matriz
+```{r}
+mean(M)
+```
+### Media por lineas
+```{r}
+rowMeans(M)
+```
+### Media por columnas
+```{r}
+colMeans(M)
+```
+### Transpuesta de una matrix
+Original
+```{r}
+M
+```
+Transpuesta
+```{r}
+t(M)
+```
+### Traza de matriz
+Suma de los elementos de la diagonal
+```{r}
+sum(diag(M))
+```
+### Suma de matrices
+```{r}
+A = rbind(c(1,2,3),c(4,5,6),c(7,8,9))
+B = rbind(c(1,0,2),c(3,0,4),c(5,0,6))
+A+B
+```
+```{r}
+B+A
+```
+### Producto por un escalar
+```{r}
+5*A
+```
+
+### Producto de matrices
+```{r}
+A%*%B
+```
+
+```{r}
+B%*%A
+```
+### Multiplicar cada elemento de matriz por su correspondiente
+```{r}
+A*B
+```
+### Comprobacion de matrices iguales
+Iguales
+```{r}
+A+B == B+A
+```
+Diferentes
+```{r}
+A%*%B == B%*%A
+```
+
+### Calcular la potencia n-esima (aproximada) de una matriz
+Package = Biodem
+```{r}
+library("Biodem")
+mtx.exp(A,4)
+```
+### Alternativa
+Package = expm
+#```{r}
+#library("expm")
+#A%^%4
+#```
+
+### Rango de matriz
+```{r}
+qr(A)$rank
+```
+### La inversa (aproximada) de una matriz (invertible) se calcula mediante la funcion solve()
+```{r}
+solve(M)
+```
+#### Comprobacion
+```{r}
+round(M%*%solve(M))
+```
+Y funcional al reves
+```{r}
+round(solve(M)%*%M)
+```
